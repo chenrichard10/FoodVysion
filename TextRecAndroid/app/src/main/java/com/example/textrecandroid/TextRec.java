@@ -145,8 +145,11 @@ public class TextRec extends AppCompatActivity {
                                 Pattern pattern = Pattern.compile(keyword);
                                 Matcher matcher = pattern.matcher(fullString);
                                 boolean found = false;
+                                mTextView.setText(" ");
                                 if (matcher.find()) {
                                     found = true;
+                                    mTextView.setText("True!");
+
                                 }
                                 System.out.println(found);
                             }
