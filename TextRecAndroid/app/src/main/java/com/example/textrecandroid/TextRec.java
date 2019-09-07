@@ -142,7 +142,7 @@ public class TextRec extends AppCompatActivity {
                                 }
                                 String fullString = stringBuilder.toString();
 
-                                Pattern pattern = Pattern.compile(keyword);
+                                Pattern pattern = Pattern.compile(keyword, Pattern.CASE_INSENSITIVE);
                                 Matcher matcher = pattern.matcher(fullString);
                                 boolean found = false;
                                 mTextView.setText(" ");
