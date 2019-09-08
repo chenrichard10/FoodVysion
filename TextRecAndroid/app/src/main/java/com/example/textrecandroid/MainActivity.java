@@ -1,6 +1,10 @@
 package com.example.textrecandroid;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,20 +18,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final EditText enterKeywords = findViewById(R.id.keyword);
-        Button takePhoto = findViewById(R.id.checkPhoto);
         Button addKeyword= findViewById(R.id.addKeyword);
+        //Change the support action bar title
+        getSupportActionBar().setTitle("Vysion");
         //set the placeholder text for enterKeyWords
-       enterKeywords.setText("Please enter the key words that you are looking for ");
-
-         takePhoto.setOnClickListener(new View.OnClickListener() {
+       enterKeywords.setText("Keyword to search: ");
+        enterKeywords.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent startIntent = new Intent(getApplicationContext(), TextRec.class);
-                startActivity(startIntent);
+                enterKeywords.setText("");
 
             }
         });
+        //ActionBar bar = getActionBar();
+       // bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#6200EE")));
         addKeyword.setOnClickListener(new View.OnClickListener() {
 
             @Override

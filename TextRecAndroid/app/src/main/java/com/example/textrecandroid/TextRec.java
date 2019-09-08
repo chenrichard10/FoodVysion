@@ -1,12 +1,18 @@
 package com.example.textrecandroid;
 
 import android.Manifest;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
@@ -26,22 +32,23 @@ public class TextRec extends AppCompatActivity {
     SurfaceView mCameraView;
     TextView mTextView;
     CameraSource mCameraSource;
-
     String keyword;
-
+    Vibrator vibrator;
 
     private static final String TAG = "TextRec";
     private static final int requestPermissionID = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_text_rec);
         Intent intent =getIntent();
         keyword=intent.getStringExtra("KEY");
         mCameraView = findViewById(R.id.surfaceView);
         mTextView = findViewById(R.id.text_view);
-
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         startCameraSource();
     }
 
@@ -145,10 +152,15 @@ public class TextRec extends AppCompatActivity {
                                 Pattern pattern = Pattern.compile(keyword, Pattern.CASE_INSENSITIVE);
                                 Matcher matcher = pattern.matcher(fullString);
                                 boolean found = false;
+
                                 mTextView.setText(" ");
                                 if (matcher.find()) {
                                     found = true;
-                                    mTextView.setText("True!");
+                                        mTextView.setBackgroundColor(Color.parseColor("#6200EE"));
+                                        mTextView.setText(keyword+" was found!");
+                                    vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+
+
 
                                 }
                                 System.out.println(found);
