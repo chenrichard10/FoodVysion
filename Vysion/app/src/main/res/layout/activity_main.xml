@@ -7,41 +7,21 @@
 
     tools:context="com.example.textrecandroid.MainActivity">
 
-    <Button
-        android:id="@+id/addKeyword"
-        android:layout_width="121dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:background="@color/nicePurple"
-        android:text="Search keyword"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.449" />
 
     <EditText
         android:id="@+id/keyword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="107dp"
-        android:layout_marginLeft="107dp"
         android:layout_marginTop="206dp"
-        android:layout_marginEnd="91dp"
-        android:layout_marginRight="91dp"
         android:layout_marginBottom="67dp"
         android:ems="10"
-        android:gravity="start|top"
+        android:gravity="center"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/addKeyword"
+        app:layout_constraintBottom_toTopOf="@+id/beginSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.292" />
 
     <TextView
         android:id="@+id/info"
@@ -51,7 +31,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="Welcome to Vysion! Enter an allergen or whatever word you are trying to look for."
+        android:text="Welcome to Vysion! Enter your specified allergens, separated by a comma"
         android:textAlignment="center"
 
         android:textSize="24sp"
@@ -60,22 +40,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="330dp"
-        android:layout_height="84dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="For more information, visit our website!"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/addKeyword"
+        android:layout_width="121dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="49dp"
+        android:background="@color/nicePurple"
+        android:text="Add Keyword"
+        android:textColor="@color/WhiteSmoke"
+        app:layout_constraintBottom_toTopOf="@+id/beginSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keyword" />
+
+    <Button
+        android:id="@+id/beginSearch"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="152dp"
+        android:background="@color/nicePurple"
+        android:text="Begin Search"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/addKeyword"
-        app:layout_constraintVertical_bias="0.287" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

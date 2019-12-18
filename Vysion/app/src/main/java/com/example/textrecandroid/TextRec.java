@@ -22,8 +22,10 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
-import java.util.regex.*;
 
+import java.util.ArrayList;
+import java.util.regex.*;
+import java.util.Timer;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -32,20 +34,20 @@ public class TextRec extends AppCompatActivity {
     SurfaceView mCameraView;
     TextView mTextView;
     CameraSource mCameraSource;
-    String keyword;
     Vibrator vibrator;
+    ArrayList<String> keywords;
 
     private static final String TAG = "TextRec";
     private static final int requestPermissionID = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        Intent intent =getIntent();
+        keywords= (ArrayList<String>)intent.getSerializableExtra("KEY");
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_text_rec);
-        Intent intent =getIntent();
-        keyword=intent.getStringExtra("KEY");
+
         mCameraView = findViewById(R.id.surfaceView);
         mTextView = findViewById(R.id.text_view);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
@@ -136,34 +138,34 @@ public class TextRec extends AppCompatActivity {
                 public void receiveDetections(Detector.Detections<TextBlock> detections) {
                     final SparseArray<TextBlock> items = detections.getDetectedItems();
                     if (items.size() != 0 ){
-
                         mTextView.post(new Runnable() {
                             @Override
                             public void run() {
                                 StringBuilder stringBuilder = new StringBuilder();
-                                for(int i=0;i<items.size();i++){
-                                    TextBlock item = items.valueAt(i);
+                                for (int i = 0; i < keywords.size(); i++) {
+                                for (int j = 0; j < items.size(); j++) {
+                                    TextBlock item = items.valueAt(j);
 
                                     stringBuilder.append(item.getValue());
                                     stringBuilder.append("\n");
                                 }
                                 String fullString = stringBuilder.toString();
 
-                                Pattern pattern = Pattern.compile(keyword, Pattern.CASE_INSENSITIVE);
-                                Matcher matcher = pattern.matcher(fullString);
-                                boolean found = false;
+                                    String currKeyword = keywords.get(i);
+                                    Pattern pattern = Pattern.compile(currKeyword, Pattern.CASE_INSENSITIVE);
+                                    Matcher matcher = pattern.matcher(fullString);
+                                    boolean found = false;
 
-                                mTextView.setText(" ");
-                                if (matcher.find()) {
-                                    found = true;
+                                    mTextView.setText(" ");
+                                    if (matcher.find()) {
+                                        found = true;
                                         mTextView.setBackgroundColor(Color.parseColor("#6200EE"));
-                                        mTextView.setText(keyword+" was found!");
-                                    vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-
-
-
+                                        mTextView.setText(currKeyword + " was found!");
+                                        vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+                                        break;
+                                    }
+                                    System.out.println(found);
                                 }
-                                System.out.println(found);
                             }
                         });
                     }
