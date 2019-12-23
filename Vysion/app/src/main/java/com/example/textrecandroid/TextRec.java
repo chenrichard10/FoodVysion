@@ -145,12 +145,13 @@ public class TextRec extends AppCompatActivity {
                                 for (int i = 0; i < keywords.size(); i++) {
                                 for (int j = 0; j < items.size(); j++) {
                                     TextBlock item = items.valueAt(j);
+                                    System.out.println(item.getValue());
 
                                     stringBuilder.append(item.getValue());
                                     stringBuilder.append("\n");
                                 }
                                 String fullString = stringBuilder.toString();
-
+                                    System.out.println(fullString);
                                     String currKeyword = keywords.get(i);
                                     Pattern pattern = Pattern.compile(currKeyword, Pattern.CASE_INSENSITIVE);
                                     Matcher matcher = pattern.matcher(fullString);

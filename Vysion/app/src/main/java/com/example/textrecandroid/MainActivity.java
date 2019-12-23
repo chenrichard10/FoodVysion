@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Toast
+        final  Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_LONG;
+
 
         final String keywords = "";
         super.onCreate(savedInstanceState);
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText enterKeywords = findViewById(R.id.keyword);
         Button addKeywords= findViewById(R.id.addKeyword);
         Button beginSearch = findViewById(R.id.beginSearch);
+        Button removeKeywords =findViewById(R.id.removeKeyword);
         //Change the support action bar title
         getSupportActionBar().setTitle("Vysion");
         //set the placeholder text for enterKeyWords
@@ -41,17 +45,24 @@ public class MainActivity extends AppCompatActivity {
        //ActionBar bar = getActionBar();
        // bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#6200EE")));
 
-        addKeywords.setOnClickListener(new View.OnClickListener() {
+        removeKeywords.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                arrLi.add(enterKeywords.getText().toString());
+                arrLi.clear();
+                CharSequence text = "All keywords cleared!";
+                Toast toast = Toast.makeText(context,text,duration);
+                toast.show();
 
-                Context context = getApplicationContext();
+            }
+        });
+
+        addKeywords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                arrLi.add(enterKeywords.getText().toString());
                 CharSequence text = enterKeywords.getText().toString()+
                         " was added!";
-                int duration = Toast.LENGTH_LONG;
-
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
             }
