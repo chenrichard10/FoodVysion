@@ -22,12 +22,9 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
-
 import java.util.ArrayList;
 import java.util.regex.*;
-import java.util.Timer;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class TextRec extends AppCompatActivity {
 
@@ -160,10 +157,10 @@ public class TextRec extends AppCompatActivity {
                                     mTextView.setText(" ");
                                     if (matcher.find()) {
                                         found = true;
-                                        mTextView.setBackgroundColor(Color.parseColor("#6200EE"));
+                                        mTextView.setBackgroundColor(Color.parseColor("#6495ED"));
                                         mTextView.setText(currKeyword + " was found!");
                                         vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
-                                        break;
+
                                     }
                                     System.out.println(found);
                                 }
